@@ -1,0 +1,35 @@
+{
+  "name": "fullstack-wbk-4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node index.js",
+		"watch": "cross-env NODE_ENV=development nodemon index.js",
+		"test": "cross-env NODE_ENV=test jest --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/otsepp/fullstack-wbk-4.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/otsepp/fullstack-wbk-4/issues"
+  },
+  "homepage": "https://github.com/otsepp/fullstack-wbk-4#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.0",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.1",
+    "mongoose": "^5.0.4"
+  },
+  "devDependencies": {
+    "cross-env": "^5.1.3",
+    "jest": "^22.2.2",
+    "nodemon": "^1.14.12",
+    "supertest": "^3.0.0"
+  }
+}
