@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 class Blog extends React.Component {
 	constructor(props) {
@@ -15,7 +16,9 @@ class Blog extends React.Component {
       showFull: false,
 			
 			blogLikeHandler: props.blogLikeHandler,
-			removeBlogHandler: props.removeBlogHandler
+			removeBlogHandler: props.removeBlogHandler,
+			
+			loggedUser: props.loggedUser
     }
   }
 	
@@ -32,24 +35,28 @@ class Blog extends React.Component {
       marginBottom: 5
     }
 		
+		const titleClickable = <p className="titleClickable" onClick={this.toggleShowFull}>{this.state.title}</p>
+		const author = <p className="author">{this.state.author}</p>
+		
 		if (!this.state.showFull) {
 			return (
-				<div style={blogStyle}>
-					<p onClick={this.toggleShowFull}>{this.state.title}</p>
-					<p>{this.state.author}</p>
+				<div style={blogStyle} className="content">
+					{titleClickable}
+					{author}
 				</div> 
 			)
 		}
+		
 		let addedBy = null
 		if (this.state.user !== undefined)
-			addedBy = <p>added by {this.state.user.name}</p>
+			addedBy = <p className="addedBy">added by {this.state.user.name}</p>
 		
 		return (
-			<div style={blogStyle} >
-				<p onClick={this.toggleShowFull}>{this.state.title}</p>
-				<p>{this.state.author}</p>
+			<div style={blogStyle} className="content-full">
+				{titleClickable}
+				{author}
 				<a href={this.state.url}>{this.state.url}</a>
-				<p>{this.state.likes} likes</p>
+				<p className="likes">{this.state.likes} likes</p>
 				<button onClick={() => this.state.blogLikeHandler(this.state.blog)}>like</button>
 				{addedBy}
 				<button onClick={() => this.state.removeBlogHandler(this.state.blog)}>delete</button>
@@ -57,6 +64,13 @@ class Blog extends React.Component {
 		)
 	}
 	
+}
+
+Blog.propTypes = {
+  blog: PropTypes.object.isRequired,
+	blogLikeHandler: PropTypes.func.isRequired,
+	removeBlogHandler: PropTypes.func.isRequired,
+	loggedUser: PropTypes.object.isRequired
 }
 
 export default Blog

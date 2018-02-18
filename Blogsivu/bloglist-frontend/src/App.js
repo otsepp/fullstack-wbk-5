@@ -62,6 +62,7 @@ class App extends React.Component {
 		event.preventDefault()
 		try {
 			const user = await loginService.login({
+				id: this.state._id,
 				username: this.state.username,
 				password: this.state.password
 			})
@@ -140,12 +141,12 @@ class App extends React.Component {
   render() {
 		if (this.state.user == null) {
 			return (
-				<div>
+				<div className="content-not-logged">
 					<h2>Log in to application</h2>
 				 
 				 <Notification message={this.state.message}/>
 				 
-					<form onSubmit={this.login}>
+					<form className="loginForm" onSubmit={this.login}>
 						<div>username 
 							<input 
 								type="text"
@@ -168,8 +169,9 @@ class App extends React.Component {
 				</div>
 			)
 		}
+		
 		return (
-      <div>
+      <div className="content-logged">
         <h2>blogs</h2>
 				
 				<Notification message={this.state.message}/>
@@ -190,7 +192,12 @@ class App extends React.Component {
 				</Togglable>
 				
 				{this.state.blogs.map(blog =>
-					<Blog blog={blog} blogLikeHandler={this.likeBlog} removeBlogHandler={this.removeBlog} />
+					<Blog 
+						blog={blog} 
+						blogLikeHandler={this.likeBlog} 
+						removeBlogHandler={this.removeBlog}
+						loggedUser={this.state.user}
+					/>
 				)}
 				
       </div>
